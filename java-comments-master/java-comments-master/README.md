@@ -1,5 +1,5 @@
 Commentari
-==========222222
+==========
 
 Commentari is a Disqus like commenting system written in Java/Spring. It was inspired by Phil Leggetter of Pusher.com's Real Time Commenting System
 
