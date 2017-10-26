@@ -1,7 +1,0 @@
-<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
-  <jaxb:globalBindings generateValueClass="false">
-    <xjc:superInterface name="com.enterprise.common.xsd.Element" />
-    <xjc:serializable uid="3099325368888314454" />
-    <xjc:simple />
-  </jaxb:globalBindings>
-</jaxb:bindings>
