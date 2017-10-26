@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project default="xjc-generate-webelements" basedir="../" name="dd-common">
+	<echo message="calling xjc-generate"/>
+	<property name="LIBS_HOME" value="${basedir}/../vat-root/libs" />
+	
+	<path id="jaxb.class.path">
+		<fileset dir="${LIBS_HOME}/jaxb">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="xjc-generate-webelements" description="generate java classes from xsd">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="jaxb.class.path" /> 
+		<xjc destdir="${basedir}/src" target="2.0" extension="true" binding="${basedir}/resources/com/enterprise/web/elements/jaxb-cust-webelements.bnd">
+			<arg value="-npa" />
+			<schema dir="${basedir}/resources/com/enterprise/web/elements" includes="*.xsd"/>
+		</xjc>
+	</target>
+	
+	<target name="xjc-generate-webservices" description="generate java classes from xsd">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="jaxb.class.path" />
+		<xjc destdir="${basedir}/src" target="2.0" extension="true" binding="${basedir}/resources/jaxb-cust-webservices.bnd">
+			<arg value="-npa" />
+			<schema dir="${basedir}/resources/com/enterprise/process/web/service" includes="*.xsd"/>
+			<schema dir="${basedir}/resources/com/enterprise/web/service" includes="*.xsd"/>	
+		</xjc>
+	</target>
+	
+	<target name="xjc-generate-geocode" description="generate java classes from xsd">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="jaxb.class.path" />
+		<xjc destdir="${basedir}/src" target="2.0" extension="true" binding="${basedir}/resources/jaxb-cust-geocode.bnd">
+			<arg value="-npa" />
+			<schema dir="${basedir}/resources" includes="*.xsd"/>
+		</xjc>
+	</target>
+</project>

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: org.springframework.web-3.0.5.RELEASE.jar 
+ org.springframework.context-3.0.5.RELEASE.jar 
+ org.springframework.core-3.0.5.RELEASE.jar 
+ log4j-1.2.14.jar 

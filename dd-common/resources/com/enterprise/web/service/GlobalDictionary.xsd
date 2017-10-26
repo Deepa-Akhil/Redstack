@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com/enterprise/web/service/GlobalDictionary" targetNamespace="http://com/enterprise/web/service/GlobalDictionary">
+	
+	<complexType name="RequestStatusElement">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" name="status" type="tns:StatusTypesElement"/>
+			<element maxOccurs="1" minOccurs="0" name="error" type="string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="DateElement">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" name="date" type="string"/>
+			<element maxOccurs="1" minOccurs="1" name="format" type="string"/>
+		</sequence>
+	</complexType>
+	
+	<simpleType name="StatusTypesElement">
+		<restriction base="string">
+			<enumeration value="SUCCESSFUL"/>
+			<enumeration value="FAILED"/>
+			<enumeration value="RESERVED"/>
+			<enumeration value="INPROGRESS"/>
+			<enumeration value="COMPLETED"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="RoleTypesElement">
+		<restriction base="string">
+			<enumeration value="DEFAULT"/>
+			<enumeration value="CUSTOM"/>
+			<enumeration value="BPEL"/>
+		</restriction>
+	</simpleType>
+</schema>
