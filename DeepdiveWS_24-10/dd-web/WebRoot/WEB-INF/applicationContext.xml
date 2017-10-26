@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd ">
+      
+	<!-- ******************************************************************** -->
+	<!-- Include context files from different layers -->
+	<!-- ******************************************************************** -->
+	
+	<import resource="classpath*:spring-web-context.xml" />
+	<import resource="classpath*:spring-businessservices-context.xml" />
+	<import resource="classpath*:spring-domain-context.xml" />
+	<import resource="classpath*:spring-dataservices-context.xml" />
+	<import resource="classpath*:spring-validation-context.xml" />
+	<import resource="classpath*:spring-common-context.xml" />
+	<import resource="classpath*:spring-wsf-context.xml" />
+</beans>

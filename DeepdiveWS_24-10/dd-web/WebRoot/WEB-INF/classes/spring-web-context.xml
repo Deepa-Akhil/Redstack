@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		classpath:/org/springframework/web/servlet/config/spring-mvc-3.0.xsd 
+		http://www.springframework.org/schema/context 
+		classpath:/org/springframework/context/config/spring-context-3.0.xsd 
+		http://www.springframework.org/schema/tx 
+		classpath:/org/springframework/transaction/config/spring-tx-3.0.xsd ">
+
+	<mvc:annotation-driven/>
+
+	<context:component-scan base-package="com.enterprise.web" />
+	<context:spring-configured/>
+	<mvc:interceptors>
+	    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+ 	</mvc:interceptors>
+
+	<mvc:default-servlet-handler />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="properties"
+      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	    <property name="locations">
+	        <list>
+	            <value>file:${redwood.env}#{systemProperties['file.separator']}date_utils.properties</value>
+	            <value>file:${redwood.env}#{systemProperties['file.separator']}directory.properties</value>
+	        </list>
+	    </property>
+	</bean>
+
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+	
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+     <import resource="spring-security.xml"/>
+    
+    <bean id="fileWatchTimerTask" class="com.enterprise.web.util.InitFileWatcher"></bean>
+    <bean id="scheduledTimerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="period" value="1800000"></property>
+        <property name="timerTask" ref="fileWatchTimerTask"></property>
+    </bean>
+     <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks" ref="scheduledTimerTask">
+        </property>
+    </bean>
+</beans>

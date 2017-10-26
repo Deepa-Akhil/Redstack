@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/MMI/!svn/ver/553/ProjectDisApp/Web/src/com/mmi/web/filter
+END
+HttpAuthenticationFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MMI/!svn/ver/426/ProjectDisApp/Web/src/com/mmi/web/filter/HttpAuthenticationFilter.java
+END
+HttpRequestFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/MMI/!svn/ver/553/ProjectDisApp/Web/src/com/mmi/web/filter/HttpRequestFilter.java
+END

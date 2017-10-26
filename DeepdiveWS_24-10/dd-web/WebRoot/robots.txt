@@ -1,0 +1,5 @@
+# robots.txt for http://www.visualage.co.za/
+
+User-agent: *
+Disallow: /web/ # Removed
+Disallow: /axis/ # Removed

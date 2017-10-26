@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="dd-web"
+  id="myeclipse.1316439491909"
+  context-root="/ddweb"
+  j2ee-spec="5.0"
+  archive="dd-web.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

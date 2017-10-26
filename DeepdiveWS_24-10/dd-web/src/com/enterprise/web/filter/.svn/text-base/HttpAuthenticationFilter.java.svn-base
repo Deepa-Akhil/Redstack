@@ -1,0 +1,85 @@
+package com.mmi.web.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Component;
+
+import com.mmi.common.pojo.JSessionBean;
+import com.mmi.common.pojo.UserAuthBean;
+import com.mmi.common.util.StringUtils;
+
+@Component(value = "httpAuthenticationFilter")
+public class HttpAuthenticationFilter implements Filter {
+	private static final String[] allowedFixedPaths = new String[] {
+		"/web/",
+		"/web/index.jsp",
+		"/web/redirect.jsp",
+		"/WEB-INF/jsp/head.jsp",
+		"/web/footer.jsp",
+		"/web/contents.jsp",
+		"/web/header.jsp",
+		"/web/DocumentService"
+	};
+	private static final String[] allowedRelativePaths = new String[] {
+		"/web/includes/",
+		"/web/javascript/",
+		"/web/images/",
+		"/web/jaas/login",
+		"/web/entity/bulletin/",
+		"/web/eservices/"
+	};
+	
+    public HttpAuthenticationFilter() {}
+
+	public void destroy() {}
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		String requestURI = httpRequest.getRequestURI();
+		boolean uriAllowed = this.eval(requestURI);
+		if (uriAllowed) {
+			chain.doFilter(request, response);
+		} else {
+			HttpSession session = httpRequest.getSession(true);
+			JSessionBean jSessionBean = (JSessionBean)session.getAttribute("jSessionBean");
+			UserAuthBean user = jSessionBean.getUser();
+			if (user.isAuthenticated()) {
+				chain.doFilter(request, response);
+			} else {
+				HttpServletResponse httpResponse = (HttpServletResponse)response;
+				httpResponse.sendRedirect("redirect.jsp");
+			}
+		}
+	}
+
+	public void init(FilterConfig fConfig) throws ServletException {}
+	
+	private boolean eval(String requestURI) {
+		boolean pass = false;
+		if (!StringUtils.isEmpty(requestURI)) {
+			for (String fixedPath : allowedFixedPaths) {
+				if (requestURI.equals(fixedPath)) {
+					pass = true; break;
+				}
+			}
+			if (!pass) {
+				for (String relativePath : allowedRelativePaths) {
+					if (requestURI.startsWith(relativePath)) {
+						pass = true; break;
+					}
+				}
+			}
+		}
+		return pass;
+	}
+}

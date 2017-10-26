@@ -1,0 +1,44 @@
+package com.mmi.web.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Component;
+
+import com.mmi.common.pojo.JSessionBean;
+import com.mmi.common.util.StringUtils;
+
+@Component(value = "httpRequestFilter")
+public class HttpRequestFilter implements Filter {
+    private static final boolean LOG_REQUEST_URI = false;
+	public HttpRequestFilter() {/* no implementation */}
+
+	public void destroy() {/* no implementation */}
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		HttpSession session = httpRequest.getSession(true);
+		JSessionBean jSessionBean = (JSessionBean)session.getAttribute("jSessionBean");
+		if (jSessionBean == null || StringUtils.isEmpty(jSessionBean.getSessionId())) {
+			jSessionBean = new JSessionBean();
+			jSessionBean.initialise(session.getId());
+			jSessionBean.setSessionId(session.getId());
+			session.setAttribute("jSessionBean", jSessionBean);
+		}
+		String requestURI = httpRequest.getRequestURI();
+		if (LOG_REQUEST_URI) {
+			System.out.println("Request URI: " + requestURI);
+		}
+		chain.doFilter(request, response);
+	}
+
+	public void init(FilterConfig fConfig) throws ServletException {/* no implementation */}
+}

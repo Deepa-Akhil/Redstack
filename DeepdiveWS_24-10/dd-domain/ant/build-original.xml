@@ -1,0 +1,46 @@
+<project name="Domain" default="hibernate.create_db_schema" basedir="../">
+    <description>Domain build file</description>
+	<property name="common.classes.dir" value="${basedir}/../Common/bin" />
+	<property name="domain.classes.dir" value="${basedir}/bin" />
+	
+	<!-- THESE MUST BE CHANGED PER DEVELOPER -->
+	<property name="myeclipse.user.local" value="/Users/rafourie/AppData/Local/" />
+	<property name="myeclipse.user.local.myeclipse" value="${myeclipse.user.local}/MyEclipse Bling Edition 9-1" />
+	
+	<!-- bundle versions -->
+	<property name="myeclipse.user.bundles.dir" value="${myeclipse.user.local.myeclipse}/configuration/org.eclipse.osgi/bundles" />
+	
+	<!-- bundle 99 -->
+	<property name="myeclipse.user.bundles.99" value="${myeclipse.user.bundles.dir}/99" />
+	<property name="myeclipse.user.bundles.99.lib" value="${myeclipse.user.bundles.dir}/99/1/.cp/lib" />
+	<property name="myeclipse.user.bundles.99.myeclipse-data" value="${myeclipse.user.bundles.dir}/99/1/.cp/myeclipse-data" />
+	<property name="myeclipse.user.bundles.99.myeclipse-data.30.lib" value="${myeclipse.user.bundles.dir}/99/1/.cp/myeclipse-data/3.0/lib" />
+	<property name="myeclipse.user.bundles.99.myeclipse-data.33.lib" value="${myeclipse.user.bundles.dir}/99/1/.cp/myeclipse-data/3.3/lib" />
+	
+	<!-- bundle 103 -->
+	<property name="myeclipse.user.bundles.103" value="${myeclipse.user.bundles.dir}/103" />
+	<property name="myeclipse.user.bundles.103.core" value="${myeclipse.user.bundles.dir}/103/1/.cp/data/2.1/core" />
+	
+	<path id="hibernate.class.path">
+		<pathelement location="${common.classes.dir}" />
+		<pathelement location="${domain.classes.dir}" />
+		<fileset dir="${myeclipse.user.bundles.99.lib}/tools">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${myeclipse.user.bundles.99.myeclipse-data.33.lib}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${myeclipse.user.bundles.103.core}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="hibernate.create_db_schema" description="Creates the database schema by using the mapping documents">
+		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.class.path" />
+		<hibernatetool destdir="${basedir}/resources">
+			<annotationconfiguration configurationfile="${basedir}/../DataServices/resources/hibernate.cfg.xml"/>
+			<hbm2ddl export="false" outputfilename="schema-export.sql"/>
+		</hibernatetool>
+		<echo message="Done." level="info" />
+	</target>
+</project>

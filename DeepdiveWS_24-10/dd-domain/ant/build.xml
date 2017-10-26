@@ -1,0 +1,32 @@
+<project name="Domain" default="hibernate.create_db_schema" basedir="../">
+    <description>Domain build file</description>
+	<property name="common.classes.dir" value="${basedir}/../dd-common/bin" />
+	<property name="domain.classes.dir" value="${basedir}/bin" />	
+
+	<!-- hibernate tools dir -->
+	<property name="org.hibernate.tool.ant.home" 
+		value="C:/IDE/Eclipse/Juno/plugins/org.hibernate.eclipse.libs_3.6.0.Final-v20121205-1936-B77/lib/tools" />
+	
+	<property name="org.hibernate.cfg.home" 
+			value="${basedir}/../dd-ear/lib" />
+	
+	<path id="hibernate.class.path">
+		<pathelement location="${common.classes.dir}" />
+		<pathelement location="${domain.classes.dir}" />
+		<fileset dir="${org.hibernate.tool.ant.home}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${org.hibernate.cfg.home}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="hibernate.create_db_schema" description="Creates the database schema by using the mapping documents">
+		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.class.path" />
+		<hibernatetool destdir="${basedir}/resources">
+			<annotationconfiguration configurationfile="${basedir}/../dd-data-services/resources/hibernate.cfg.xml"/>
+			<hbm2ddl export="false" outputfilename="schema-export.sql"/>
+		</hibernatetool>
+		<echo message="Done." level="info" />
+	</target>
+</project>

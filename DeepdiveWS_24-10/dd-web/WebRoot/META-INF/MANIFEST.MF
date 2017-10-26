@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: dd-business-services.jar 
+ dd-common.jar 
+ dd-domain.jar 
+ dd-data-services.jar 
+ dd-validation.jar
+

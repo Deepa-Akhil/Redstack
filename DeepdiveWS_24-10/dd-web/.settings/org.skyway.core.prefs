@@ -1,0 +1,6 @@
+#org.skyway.core settings
+#Mon Sep 19 15:45:42 CAT 2011
+version=9.0.1.qualifier
+models.folder.name=.springDSL
+hide.dsl=false
+initialized=true

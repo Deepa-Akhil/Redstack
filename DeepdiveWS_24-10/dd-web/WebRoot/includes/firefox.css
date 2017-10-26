@@ -1,0 +1,16 @@
+@CHARSET "ISO-8859-1";
+
+div.selectArea span.center24 input.comboText {position:relative; top:1px; height:15px; min-height:15px; border:none; font-weight:bold; color:#959595; outline:none; padding:4px 0 4px 0;}
+
+div.selectArea span.center24disabled input[disabled] {position:relative; top:1px; background-color:#efefef; height:15px; min-height:15px; border:none; outline:none; padding:4px 0 4px 0;}
+div.selectArea span.center24 input[disabled] {position:relative; top:1px; background-color:white; height:15px; min-height:15px; border:none; font-weight:bold; color:#959595; outline:none; padding:4px 0 4px 0;}
+
+[disabled] {
+  color:#a0a0a0;
+}
+
+
+
+
+
+

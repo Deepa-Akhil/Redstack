@@ -1,0 +1,52 @@
+package com.mmi.wsf.service.impl;
+
+import momentum.security.GetUserByUsernameResponse;
+import momentum.security.dto.UserDTO;
+
+import org.apache.log4j.Logger;
+import org.apache.ws.security.WSUsernameTokenPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+
+import com.mmi.wsf.service.consume.SecurityFacadeServiceClient;
+
+@Component(value="userDetailsService")
+public class UserDetailsServiceImpl implements UserDetailsService {
+	private static final Logger logger = Logger.getLogger(UserDetailsServiceImpl.class);
+	
+	@Autowired
+	private SecurityFacadeServiceClient securityFacadeServiceClient;
+
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userDetails = null;
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if (principal instanceof UserDetails) {
+				username = ((UserDetails)principal).getUsername();
+			} else if (principal instanceof WSUsernameTokenPrincipal) {
+				username = ((WSUsernameTokenPrincipal)principal).getName();
+			}
+			logger.debug("@userDetailsService fetched authentication token from SecurityContextHolder having username [" + username + "] ");
+		} else {
+			GetUserByUsernameResponse getUserByUsernameResponse = securityFacadeServiceClient.getUserByUsername(username);
+			if (getUserByUsernameResponse != null) {
+				UserDTO userDto = getUserByUsernameResponse.getGetUserByUsernameReturn();
+				if (userDto != null) {
+					userDetails = new UserDetailsImpl();
+					userDetails.setUsername(username);
+					userDetails.setPassword(userDto.getUserPassword());
+					boolean enabled = userDto.getAccountStatus().equals("1") ? true : false;
+					userDetails.setEnabled(enabled);
+				}
+			}	
+		}
+		return (UserDetails)userDetails;
+	}
+}

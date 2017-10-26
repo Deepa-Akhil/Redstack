@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://com/mmi/web/service/DocumentService" 
+		xmlns="http://www.w3.org/2001/XMLSchema" 
+		xmlns:tns="http://com/mmi/web/service/DocumentService">
+		
+	<element name="DocumentTypesRequest">
+	    <complexType>
+	 	  	<sequence>
+	 	  		<element name="searchCriteria" minOccurs="0" maxOccurs="1" type="string" />
+	    	</sequence>
+	    </complexType>
+	</element>
+    
+    <element name="DocumentTypesResponse">
+	    <complexType>
+	 	  	<sequence>
+	 	  		<element name="documentType" minOccurs="1" maxOccurs="unbounded" type="tns:DocumentTypeElement" />
+	 	  		<element name="requestStatus" minOccurs="0" maxOccurs="1" type="tns:RequestStatusElement"/>
+	    	</sequence>
+	    </complexType>
+	</element>
+	
+	<complexType name="DocumentTypeElement">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="documentType" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="description" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="RequestStatusElement">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="status" type="tns:StatusTypesElement" />
+			<element minOccurs="0" maxOccurs="1" name="error" type="string" />
+		</sequence>
+	</complexType>
+	
+	<simpleType name="StatusTypesElement">
+		<restriction base="string">
+			<enumeration value="SUCCESSFUL" />
+			<enumeration value="FAILED" />
+		</restriction>
+	</simpleType>
+</schema>

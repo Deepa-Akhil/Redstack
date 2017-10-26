@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:complex="http://xsd.common.enterprise.com/WebElementComplexTypes" 
+	xmlns:global="http://xsd.common.enterprise.com/GlobalDictionary" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	targetNamespace="http://xsd.common.enterprise.com/WebElementComplexTypes">
+	
+	<xsd:import namespace="http://xsd.common.enterprise.com/GlobalDictionary" schemaLocation="../../common/GlobalDictionary.xsd"/>
+  
+	<!-- Define elements that will represent the html text input elements part of a form submission. If the form
+	     post must have a 'username2' parameter, define a UsernameInputElement with a 'username2' attribute. This
+	     will assist PageControllers handling form submissions and will auto-magically set the data on the
+	     parameter. -->
+  
+	<xsd:element name="UsernameInputElement" type="complex:UsernameInputElement"/>
+	<xsd:element name="PasswordInputElement" type="complex:PasswordInputElement"/>
+	<xsd:element name="MandatoryValueElement" type="complex:MandatoryValueElement"/>
+	<xsd:element name="MandatoryNumberElement" type="complex:MandatoryNumberElement"/>
+	<xsd:element name="MandatoryEmailInputElement" type="complex:MandatoryEmailInputElement"/>
+	<xsd:element name="CellphoneNumberInputElement" type="complex:CellphoneNumberInputElement"/>
+	
+	<xsd:complexType name="CellphoneNumberInputElement">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Id" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Name" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Type" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Style" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClass" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClassAlt" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Title" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Valid" type="xsd:boolean"/>
+      		<xsd:element minOccurs="0" name="Error" type="xsd:string"/>
+      		<!-- attributes specific to this complex element -->
+			<xsd:element minOccurs="0" name="Number" type="global:CellphoneNumber"/>
+      		<xsd:element minOccurs="0" name="Attributes" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	  
+	<xsd:complexType name="UsernameInputElement">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Id" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Name" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Type" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Style" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClass" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClassAlt" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Title" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Valid" type="xsd:boolean"/>
+      		<xsd:element minOccurs="0" name="Error" type="xsd:string"/>
+      		<!-- attributes specific to this complex element -->
+			<xsd:element minOccurs="1" name="Username" type="global:Alpha_1_Unbounded"/>
+      		<xsd:element minOccurs="0" name="Attributes" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PasswordInputElement">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Id" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Name" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Type" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Style" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClass" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClassAlt" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Title" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Valid" type="xsd:boolean"/>
+      		<xsd:element minOccurs="0" name="Error" type="xsd:string"/>
+      		<!-- attributes specific to this complex element -->
+      		<xsd:element minOccurs="1" name="Password" type="global:Alpha_1_30"/>
+      		<xsd:element minOccurs="0" name="Attributes" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MandatoryValueElement">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Id" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Name" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Type" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Style" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClass" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClassAlt" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Title" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Valid" type="xsd:boolean"/>
+      		<xsd:element minOccurs="0" name="Error" type="xsd:string"/>
+      		<!-- attributes specific to this complex element -->
+			<xsd:element minOccurs="1" name="Value" type="global:MandatoryString"/>
+      		<xsd:element minOccurs="0" name="Attributes" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Disabled" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Readonly" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MandatoryNumberElement">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Id" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Name" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Type" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Style" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClass" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClassAlt" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Title" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Error" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Valid" type="xsd:boolean"/>
+      		<!-- attributes specific to this complex element -->
+			<xsd:element minOccurs="1" name="Value" type="global:MandatoryInteger"/>
+      		<xsd:element minOccurs="0" name="Attributes" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Disabled" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MandatoryEmailInputElement">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Id" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Name" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Type" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Style" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClass" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="StyleClassAlt" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Title" type="xsd:string"/>
+      		<xsd:element minOccurs="0" name="Valid" type="xsd:boolean"/>
+      		<xsd:element minOccurs="0" name="Error" type="xsd:string"/>
+      		<!-- attributes specific to this complex element -->
+			<xsd:element minOccurs="1" name="Value" type="global:Email"/>
+      		<xsd:element minOccurs="0" name="Attributes" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
