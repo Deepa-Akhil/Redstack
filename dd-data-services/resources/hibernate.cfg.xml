@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="dialect">org.hibernate.dialect.OracleDialect</property>
+		
+		<mapping class="com.enterprise.domain.entity.AirCarrier" />
+		<mapping class="com.enterprise.domain.entity.Airport" />
+		<mapping class="com.enterprise.domain.entity.Branch" />
+		<mapping class="com.enterprise.domain.entity.City" />
+		<mapping class="com.enterprise.domain.entity.CMF" />
+		<mapping class="com.enterprise.domain.entity.Container" />
+		<mapping class="com.enterprise.domain.entity.Country" />
+		<mapping class="com.enterprise.domain.entity.Location" />
+		<mapping class="com.enterprise.domain.entity.LogisticsServiceProvider" />
+		<mapping class="com.enterprise.domain.entity.SeaCarrier" />
+		<mapping class="com.enterprise.domain.entity.Seaport" />
+		<mapping class="com.enterprise.domain.entity.Shipment" />
+		<mapping class="com.enterprise.domain.entity.ShipmentContainer" />
+		<mapping class="com.enterprise.domain.entity.User" />
+		<mapping class="com.enterprise.domain.entity.Package" />
+		<mapping class="com.enterprise.domain.entity.UserAccess" />
+		<mapping class="com.enterprise.domain.entity.LoadHistory" />
+		<mapping class="com.enterprise.domain.entity.Rate" />
+		<mapping class="com.enterprise.domain.entity.RateDetail" />
+		<mapping class="com.enterprise.domain.entity.Currency" />
+		<mapping class="com.enterprise.domain.entity.CarrierAlias" />
+		<mapping class="com.enterprise.domain.entity.Invoice" />
+		<mapping class="com.enterprise.domain.entity.InvoiceDetail" />
+		<mapping class="com.enterprise.domain.entity.Order" />
+		<mapping class="com.enterprise.domain.entity.OrderLine" />
+	 	<mapping class="com.enterprise.domain.entity.OrderExpedLine" /> 
+	 	<mapping class="com.enterprise.domain.entity.ContainerTypeAlias" /> 
+	 	<mapping class="com.enterprise.domain.entity.ContainerType" /> 
+	 	<mapping class="com.enterprise.domain.entity.SubPackageDetail" />
+	 	<mapping class="com.enterprise.domain.entity.RateDetailCharges" />
+	 	<mapping class="com.enterprise.domain.entity.Custom" />
+	 	<mapping class="com.enterprise.domain.entity.ContainerStatus" />
+		
+		<mapping class="com.enterprise.domain.entity.meta.AirCarrierMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.AirportMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.CityMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.Meta" />
+		<mapping class="com.enterprise.domain.entity.meta.SeaCarrierMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.SeaportMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.ShipmentMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.RateMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.InvoiceMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.OrderMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.CustomMeta" />
+		<mapping class="com.enterprise.domain.entity.meta.ContainerStatusMeta" />
+		
+		<mapping class="com.enterprise.domain.entity.LocationAlias" />
+		<mapping class="com.enterprise.domain.entity.RefType" />
+		<mapping class="com.enterprise.domain.entity.MenuFunction" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/context 
+		classpath:/org/springframework/context/config/spring-context-3.0.xsd 
+		http://www.springframework.org/schema/tx 
+		classpath:/org/springframework/transaction/config/spring-tx-3.0.xsd ">
+
+
+	<!-- ******************************************************************** -->
+	<!-- Scan for dao layer annotated beans -->
+	<!-- ******************************************************************** -->
+	<context:component-scan base-package="com.enterprise.dataservices" />
+	
+	
+	<!-- ******************************************************************** -->
+	<!-- Mark bean transactions as annotation driven -->
+	<!-- ******************************************************************** -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- ******************************************************************** -->
+	<!-- PropertyConfigurer for the DAO -->
+	<!-- ******************************************************************** -->
+	<context:property-placeholder location="classpath:SpringWeb-dao.properties"  />		
+	
+ 	<!-- ******************************************************************** -->
+	<!-- Setup a data source --> 
+	<!-- ******************************************************************** -->
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<property name="configurationClass">
+			<value>org.hibernate.cfg.AnnotationConfiguration</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.connection.datasource">jdbc/global_ds</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+        		<prop key="hibernate.cache.use_second_level_cache">true</prop>
+        		<prop key="hibernate.cache.use_query_cache">true</prop>
+        		<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+        		<prop key="hibernate.query.substitutions">true 1, false 0</prop>
+        		<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- ******************************************************************** -->
+	<!-- Setup the transaction manager -->
+	<!-- ******************************************************************** -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>
